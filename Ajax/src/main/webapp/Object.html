@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //------看起來空空的陣列------
+        var arr = new Array();
+        var arr = [];//literal表示法(字面值)
+        //------有較多資料的陣列------
+        var arr = new Array(11, 22, 33);
+        var arr = [11, 22, 33];
+        //------看起來空空的物件------
+        var obj = new Object();
+        var obj = {};
+        //------有較多資料的物件------
+        var emp = {
+            empno: 7002,
+            ename: "Anthony",
+            phone: "03-1234567",
+            toString: function () {//------覆寫Object.toString([object Object])------
+                return "[我是員工]";
+            }
+        }
+        // obj.ename = "Anthony";
+        // document.write(obj.ename,"<br>)");
+
+        document.write("emp.ename : ", emp.ename, "<br>");
+        document.write("emp.phone : ", emp.phone, "<br>");
+        document.write("emp : ", emp, "<br>");//自動呼叫emp.toString()
+    </script>
+    <h2>JSON.stringify()----------------------------------------1</h2>
+    <script>
+        var str = JSON.stringify(emp);
+        document.write("str : ", str, "<br>");
+    </script>
+    <h2>JSON.parse()-----------------------------------------1</h2>
+    <script>
+        var str = '{"empno":7002,"ename":"Anthony","phone":"03-1234567"}';
+        var obj = JSON.parse(str);
+        document.write("obj.ename : ", obj.ename, "<br>");
+        document.write("obj.phone : ", obj.phone, "<br>");
+    </script>
+    <h2>JSON.stringify()----------------------------------------2</h2>
+    <script>
+        var emp = {
+            empno: 7002,
+            ename: "Anthony",
+            phone: ["03-1234567", "03-7654321", "0911-168168"]
+        }
+        var str = JSON.stringify(emp);
+        document.write("str : ", str, "<br>");
+    </script>
+    <h2>JSON.parse()-----------------------------------------2</h2>
+    <script>
+        var str = '{"empno":7002,"ename":"Anthony","phone":["03-1234567", "03-7654321", "0911-168168"]}';
+        var obj = JSON.parse(str);
+        document.write("obj.ename : ", obj.ename, "<br>");
+        document.write("obj.phone[0] : ", obj.phone[0], "<br>");
+        document.write("obj.phone : ", obj.phone, "<br>");//obj.phone.toString():03-1234567", "03-7654321", "0911-168168;
+    </script>
+    <h2>JSON.stringify()----------------------------------------3</h2>
+    <script>
+        var emp = {
+            empno: 7002,
+            ename: "Anthony",
+            phone: {
+                O: "03-1234567",
+                H: "03-7654321",
+                M: "0911-168168"
+            }
+        }
+        var str = JSON.stringify(emp);
+        document.write("str : ", str, "<br>");
+    </script>
+       <h2>JSON.parse()-----------------------------------------3</h2>
+       <script>
+           var str = '{"empno":7002,"ename":"Anthony","phone":{"O":"03-1234567","H":"03-7654321","M":"0911-168168"}}';
+           var obj = JSON.parse(str);
+           document.write("obj.ename : ", obj.ename, "<br>");
+           document.write("obj.phone.O : ", obj.phone.O, "<br>");//印出O
+           document.write("obj.phone.H : ", obj.phone.H, "<br>");//印出H
+           document.write("obj.phone.M : ", obj.phone.M, "<br>");//印出M
+           document.write("obj.phone : ", obj.phone, "<br>");//obj.phone.toString():[object Object]
+       </script>
+</body>
+
+</html>

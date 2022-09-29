@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>操作DOM XML文件</title>
+  <style>
+    .empTable th {
+      background-color: rgb(123, 170, 241);
+    }
+
+    .empTable td {
+      border-bottom: 2px dotted rgb(89, 111, 234);
+    }
+  </style>
+</head>
+
+<body>
+  <input type="button" value="顯示員工資料" onclick="getXML();">
+  <div id="showPanel"></div>
+
+  <script>
+    function showEmps(doc) {
+      let table, tr, th, td, textNode;
+      let fields = doc.documentElement.childNodes;
+
+      table = document.createElement("table");
+      for (let i = 0; i < fields.length; i++) {
+        //產生一列
+        tr = document.createElement("tr");
+        table.appendChild(tr);
+        //產生左邊格
+        th = document.createElement("th");
+        tr.appendChild(th);
+        textNode = document.createTextNode(fields[i].nodeName);
+        th.appendChild(textNode);
+
+        //產生右邊格
+        td = document.createElement("td");
+        tr.appendChild(td);
+        textNode = document.createTextNode(fields[i].firstChild.nodeValue);
+        td.appendChild(textNode);
+      }
+      table.setAttribute("class", "empTable");
+      document.getElementById("showPanel").appendChild(table);
+
+    }//function showEmps
+
+    function getXML() {
+      //===實作(填入程式碼)
+      let xhr = new XMLHttpRequest();
+      //設定好回呼函數 
+      xhr.onload = function () {
+        if (xhr.status == 200) {
+          //===回傳的XML資料,可將其改為以XML來處理...^_^\\\)
+          alert(xhr.responseXML);
+          // document.getElementById("showPanel").innerHTML = xhr.responseXML;
+          //-------將xml轉成html元素放入網頁文件中
+          showEmps(xhr.responseXML);
+        } else {
+          alert(xhr.status);
+        }//xhr.status == 200
+      }//onload   
+
+      //建立好Get連接與送出請求  
+      let url = "JONES.xml";
+      xhr.open("Get", url, true);
+      //送出請求
+      xhr.send(null);
+    }; //function 
+  </script>
+</body>
+
+</html>

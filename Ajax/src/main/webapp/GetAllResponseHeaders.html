@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>GetAllResponseHeaders</title>
+</head>
+
+<body>
+
+  <input type="button" value="getAllResponseHeaders" onclick="getAllResponseHeaders()">
+  <div id="showPanel"></div>
+
+  <script>
+    let xhr = null;
+
+    function stateChanged() {
+      console.log(xhr.readyState);
+      //server端處理完畢了没
+      if (xhr.readyState == 4) {  //server處理完畢
+        if (xhr.status == 200) {  //request做成功了嗎
+          alert(xhr.getAllResponseHeaders());
+        } else {
+          alert(xhr.status);
+        }
+      }
+    }
+
+    function getAllResponseHeaders() {
+      xhr = new XMLHttpRequest(); //xhr.readyState:0
+      //設定好回呼函式
+      xhr.onreadystatechange = stateChanged;
+      //建立好Get連接
+      xhr.open("get", "GetAllResponseHeaders.jsp", true); //xhr.readyState:1
+      //送出請求 
+      xhr.send(null);//xhr.readyState:2
+
+    } 
+  </script>
+</body>
+
+</html>

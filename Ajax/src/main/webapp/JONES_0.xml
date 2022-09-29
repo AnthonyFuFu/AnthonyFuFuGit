@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<emp>
+  <empno>7566</empno>
+  <ename>JONES</ename>
+  <job>MANAGER</job>
+  <mgr>7839</mgr>
+  <hiredate>1981-04-02</hiredate>
+  <sal>2975</sal>
+  <deptno>20</deptno>
+</emp>
+

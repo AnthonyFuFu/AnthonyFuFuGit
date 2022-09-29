@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>使用GET請求方式取得JSON回應字串</title>			   
+  <style>  
+  table {border-collapse:collapse;}
+  .empTable th{ background-color:#BFBFFF;
+                color:blue;	
+				font-weight:normal;
+				padding : 5px;
+			  }  
+				
+  .phoneTable {margin : 5px 10px 5px 5px;
+              }
+  .phoneTable th{ background-color:white;
+                color:deepPink;	
+				font-weight:normal;
+				padding : 5px;
+				}	
+  </style>  
+<script src="json.js"></script>   
+</head>
+<body>
+<table align="center">
+  <tr>
+    <td>
+      員工帳號:
+      <input type="text" name="empno" id="empno" value="1688">
+      <input type="button" value="取得員工資料" onClick="getEmployee();">	
+    </td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<div id="showPanel">
+</div> 
+
+<script>  
+function showEmployee(json){
+  //剖析json字串,將其轉成js物件
+  let emp = JSON.parse(json);
+  
+  let str = "<table class='empTable' align='center'>";
+  str += "<tr><td class='mainTitle'>姓名</td><td class='mainData'>"+ emp.ename +"</td></tr>";
+  str += "<tr><td class='mainTitle'>電話</td><td class='mainData'><table class='phoneTable' align='left'>";
+  str += "<tr><th>(O)</th><td>"+ emp.phone.O +"</td></tr>";
+  str += "<tr><th>(H)</th><td>"+ emp.phone.H +"</td></tr>";
+  str += "<tr><th>(M)</th><td>"+ emp.phone.M +"</td></tr>";  
+  str += "</table></td></tr>";
+  str += "</table>"; 
+  document.getElementById("showPanel").innerHTML = str;
+}
+
+function getEmployee(){ 
+  //===實作(填入程式碼)
+  let xhr = new XMLHttpRequest();
+  //設定好回呼函數   
+  xhr.onload = function (){
+      if( xhr.status == 200){
+        showEmployee(xhr.responseText);//xhr.responseText取得JSON字串
+      }else{
+        alert( xhr.status );
+      }// status
+  };// onload
+  
+  //建立好Get連接與送出請求 
+  let url= "GetJsonWithJava.jsp?empno=" + document.getElementById("empno").value;
+  xhr.open("Get",url,true); 
+  xhr.send( null );
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Examples</title>
+</head>
+
+<body>
+    <img src="add_2.png" id="btnAddSpot">
+
+    <!-- -----------表單----------- -->
+    <div class="spot" style="display:none">
+        景點<input type="text" name="spot"><img src="trash.png">
+    </div>
+    <form id="myForm">
+        <input type="submit" id="btnSend" value="送出">
+    </form>
+    
+    <script type="text/javascript">
+        function addSpot(){
+            let myForm = document.getElementById("myForm");
+            let btnSend = document.getElementById("btnSend");
+            let spot = document.getElementsByClassName("spot")[0];
+
+            let newSpot = spot.cloneNode(true);//複製節點
+            newSpot.style.display = "";//設為可視
+            newSpot.getElementsByTagName("img")[0].onclick = removeSpot;//設定垃圾桶可點按移除該景點資料
+
+            myForm.insertBefore(newSpot,btnSend);
+        }
+        function removeSpot(e){
+            document.getElementById("myForm").removeChild(e.target.parentNode);
+        }
+        function init(){
+            //------設定初始狀態
+
+            //------設定處理器
+            document.getElementById("btnAddSpot").onclick = addSpot;
+        }
+        window.addEventListener("load",init,false)
+    </script>
+</body>
+
+</html>

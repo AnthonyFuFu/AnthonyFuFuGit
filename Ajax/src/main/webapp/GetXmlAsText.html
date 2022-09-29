@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<!-- Created on: 2009/7/3 -->
+<html>
+<head>
+<meta charset="utf-8">
+  <title>取得XML資料將其視為文字性資料</title> 
+</head>
+<body>
+<input type="button" value="顯示員工資料"	onclick="getXML();">
+<div id="showPanel"></div>
+
+<script>  
+function getXML(){  
+  //===實作(填入程式碼)  
+  //產生xhr物件   
+  let xhr = new XMLHttpRequest(); 
+  //設定好回呼函數 
+  xhr.onload = function (){   
+      if( xhr.status == 200 ){   
+        //回傳的XML資料若以純文字看待不容易剖析,可將其改為以XML來處理...^_^\\\)
+        alert( xhr.responseText );
+      }else{ 
+        alert( xhr.status );
+      }
+  }; //xhr.onload   
+    
+  let url = "JONES.xml";
+  xhr.open("Get",url,true);
+  xhr.send(null);
+}; //function  
+</script> 
+</body>
+</html>
